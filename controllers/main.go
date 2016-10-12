@@ -17,6 +17,7 @@ func Register(templates *template.Template) {
 	homeController := new(homeController)
 	homeController.template = templates.Lookup("home.html")
 	router.HandleFunc("/", homeController.get)
+	router.HandleFunc("/api/towed_cars", homeController.apiSearch)
 
 	http.Handle("/", router)
 
