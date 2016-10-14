@@ -11,6 +11,7 @@ import (
 type CarDetails []struct {
 	Color          string `json:"color"`
 	Make           string `json:"make"`
+	Plate          string `json:"plate"`
 	State          string `json:"state"`
 	TowDate        string `json:"tow_date"`
 	TowPhoneNumber string `json:"tow_facility_phone"`

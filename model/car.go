@@ -2,58 +2,90 @@ package model
 
 // Car represents data about a single car
 type Car struct {
-	color          string
-	make           string
-	state          string
-	towDate        string
-	towPhoneNumber string
-	towedToAddress string
+	Color          string
+	Make           string
+	Plate          string
+	State          string
+	TowDate        string
+	TowPhoneNumber string
+	TowedToAddress string
 }
 
-func (details *Car) Color() string {
-	return details.color
+func (car *Car) color() string {
+	return car.Color
 }
 
-func (details *Car) Make() string {
-	return details.make
+func (car *Car) make() string {
+	return car.Make
 }
 
-func (details *Car) State() string {
-	return details.state
+func (car *Car) plate() string {
+	return car.Plate
 }
 
-func (details *Car) TowDate() string {
-	return details.towDate
+func (car *Car) state() string {
+	return car.State
 }
 
-func (details *Car) TowPhoneNumber() string {
-	return details.towPhoneNumber
+func (car *Car) towDate() string {
+	return car.TowDate
 }
 
-func (details *Car) TowedToAddress() string {
-	return details.towedToAddress
+func (car *Car) towPhoneNumber() string {
+	return car.TowPhoneNumber
 }
 
-func (details *Car) SetColor(value string) {
-	details.color = value
+func (car *Car) towedToAddress() string {
+	return car.TowedToAddress
 }
 
-func (details *Car) SetMake(value string) {
-	details.make = value
+func (car *Car) setColor(value string) {
+	car.Color = value
 }
 
-func (details *Car) SetState(value string) {
-	details.state = value
+func (car *Car) setMake(value string) {
+	car.Make = value
 }
 
-func (details *Car) SetTowDate(value string) {
-	details.towDate = value
+func (car *Car) setPlate(value string) {
+	car.Plate = value
 }
 
-func (details *Car) SetTowPhoneNumber(value string) {
-	details.towPhoneNumber = value
+func (car *Car) setState(value string) {
+	car.State = value
 }
 
-func (details *Car) SetTowedToAddress(value string) {
-	details.towedToAddress = value
+func (car *Car) setTowDate(value string) {
+	car.TowDate = value
+}
+
+func (car *Car) setTowPhoneNumber(value string) {
+	car.TowPhoneNumber = value
+}
+
+func (car *Car) setTowedToAddress(value string) {
+	car.TowedToAddress = value
+}
+
+// SearchByLicensePlate makes a call to get all of the towed cars in the last 7 days,
+// Then searches the returned data for a matching license plate.
+func SearchByLicensePlate(licensePlate string) *Car {
+
+	searchedCar := new(Car)
+
+	carData := GetTowedCarData()
+
+	for _, car := range carData {
+		if car.Plate == licensePlate {
+			searchedCar.setColor(car.Color)
+			searchedCar.setMake(car.Make)
+			searchedCar.setPlate(car.Plate)
+			searchedCar.setState(car.State)
+			searchedCar.setTowDate(car.TowDate)
+			searchedCar.setTowPhoneNumber(car.TowPhoneNumber)
+			searchedCar.setTowedToAddress(car.TowedToAddress)
+		}
+	}
+
+	return searchedCar
 }

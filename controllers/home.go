@@ -1,9 +1,8 @@
 package controllers
 
 import (
-	"encoding/json"
-	"fmt"
 	"net/http"
+	"strings"
 	"text/template"
 	"towed-car-locator/model"
 	"towed-car-locator/viewmodels"
@@ -19,15 +18,13 @@ func (home *homeController) get(w http.ResponseWriter, req *http.Request) {
 	home.template.Execute(w, vm)
 }
 
-func (home *homeController) apiSearch(w http.ResponseWriter, req *http.Request) {
-	m := model.GetTowedCarData()
-	fmt.Println(m)
-	w.Header().Add("Context-Type", "application/json")
+func (home *homeController) licensePlateSearch(w http.ResponseWriter, req *http.Request) {
+	req.ParseForm()
+	plateNumber := req.FormValue("plateNumber")
+	plateNumber = strings.Trim(plateNumber, " ")
+	plateNumber = strings.ToUpper(plateNumber)
 
-	data, err := json.Marshal(m)
+	m := model.SearchByLicensePlate(plateNumber)
 
-	if err != nil {
-		w.WriteHeader(404)
-	}
-	w.Write(data)
+	home.template.Execute(w, m)
 }

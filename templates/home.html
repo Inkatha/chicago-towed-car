@@ -21,10 +21,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-12">
-                <form>
+                <form action="api/search_license_plate" method="POST">
                     <div class="form-group">
                         <label for="license-plate">License Plate Number</label>
-                        <input type="text" class="form-control" id="license-plate" placeholder="Enter your license plate number">
+                        <input type="text" name="plateNumber" class="form-control" id="license-plate" placeholder="Enter your license plate number">
                         <button class="btn btn-primary search-button">Search</button>
                     </div>
                 </form>
@@ -33,7 +33,6 @@
                 <h1>Search Data will be placed here.</h1>
             </div>
         </div>
-        
     </div>
   </div>
 
