@@ -67,6 +67,19 @@ func (car *Car) setTowedToAddress(value string) {
 	car.TowedToAddress = value
 }
 
+// NewCar creates a new car
+func NewCar() *Car {
+	car := new(Car)
+	car.Color = ""
+	car.Make = ""
+	car.Plate = ""
+	car.State = ""
+	car.TowDate = ""
+	car.TowPhoneNumber = ""
+	car.TowedToAddress = ""
+	return car
+}
+
 // SearchByLicensePlate makes a call to get all of the towed cars in the last 7 days,
 // Then searches the returned data for a matching license plate.
 func SearchByLicensePlate(licensePlate string) *Car {

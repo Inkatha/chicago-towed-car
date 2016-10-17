@@ -2,8 +2,6 @@ package controllers
 
 import (
 	"chicago-towed-car/model"
-	"chicago-towed-car/viewmodels"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -15,12 +13,13 @@ type homeController struct {
 }
 
 func (home *homeController) homePageHandler(w http.ResponseWriter, req *http.Request) {
-	vm := viewmodels.GetHome()
+	m := model.NewCar()
+
 	w.Header().Add("Context-Type", "text/html")
 
 	switch req.Method {
 	case "GET":
-		home.template.Execute(w, vm)
+		home.template.Execute(w, m)
 	case "POST":
 		req.ParseForm()
 		plateNumber := req.FormValue("plateNumber")
@@ -29,7 +28,6 @@ func (home *homeController) homePageHandler(w http.ResponseWriter, req *http.Req
 
 		m := model.SearchByLicensePlate(plateNumber)
 
-		fmt.Println(m.Plate)
 		home.template.Execute(w, m)
 	default:
 		log.Fatal("Could not find appropriate route for home.html")
