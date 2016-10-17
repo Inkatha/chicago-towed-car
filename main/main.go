@@ -1,10 +1,10 @@
 package main
 
 import (
+	"chicago-towed-car/controllers"
 	"net/http"
 	"os"
 	"text/template"
-	"towed-car-locator/controllers"
 )
 
 func main() {
